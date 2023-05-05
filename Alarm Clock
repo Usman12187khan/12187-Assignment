@@ -1,0 +1,24 @@
+function startTimer() {
+  var timeInput = prompt("Enter time in format: HH:MM:SS");
+  var timeArray = timeInput.split(":");
+  var hours = parseInt(timeArray[0]);
+  var minutes = parseInt(timeArray[1]);
+  var seconds = parseInt(timeArray[2]);
+  var totalTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
+  var timerInterval = setInterval(function() {
+    totalTimeInSeconds--;
+    var hoursLeft = Math.floor(totalTimeInSeconds / 3600);
+    var minutesLeft = Math.floor((totalTimeInSeconds - (hoursLeft * 3600)) / 60);
+    var secondsLeft = totalTimeInSeconds - (hoursLeft * 3600) - (minutesLeft * 60);
+
+    console.log(hoursLeft + ":" + minutesLeft + ":" + secondsLeft);
+
+    if (totalTimeInSeconds === 0) {
+      clearInterval(timerInterval);
+      alert("Time is up!");
+      var audio = new Audio('sound.mp3');
+      audio.play();
+    }
+  }, 1000);
+}
